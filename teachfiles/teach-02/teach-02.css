@@ -1,0 +1,37 @@
+body {
+    width: 60%;
+    margin: auto;
+}
+
+div {
+    height: 200px;
+    margin-top: 25px;
+    margin-bottom: 5px;
+    padding: 8px;
+}
+
+.one {
+    font-size: 2em;
+    background: #123456;
+}
+
+.two {
+    font-size: 4em;
+    background: #bada55;
+}
+
+button, input {
+    display: block;
+}
+
+button:first-of-type {
+    margin-bottom: 25px;
+}
+
+button:last-of-type {
+    margin-top: 5px;
+}
+
+div:hover {
+    font-weight: bold;
+}
