@@ -4,6 +4,14 @@ html {
     background-color: #123456; 
 }
 
+a:link, a:visited {
+    color: #123456;
+}
+
+a:hover {
+    color: #4E6781
+}
+
 body {
     width: 70%;
     margin: auto;
