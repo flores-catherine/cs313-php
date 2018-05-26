@@ -15,8 +15,10 @@
         //print date
         echo date("l jS \of F Y");
         ?>
-    
     </header>
+    <nav>
+        <h2><a href="/cs313-php/web/project1/index.php">Project 1</a></h2>
+    </nav>
     <main>
         <p>For my homepage, I decided to try something new I had never done before and make an image slideshow. I copied some code from w3schools and modified it to fit my pictures.</p>
         <div class="slideshow-container">
