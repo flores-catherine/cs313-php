@@ -25,7 +25,7 @@
         <h1>Explore Classic Arnold One-Liners</h1>
         <div class="flex-main">
         <img src="images/conan-small.jpg">
-        <form method="post" action="/cs313-php/project1/index.php">
+        <form method="post" action="index.php">
             <h2>Query Quotes by title</h2>
             <label>Movie</label><br>
             <?php echo $movieList; ?>
