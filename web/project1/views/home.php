@@ -21,14 +21,5 @@
             <p><a href="index.php?action=explore">Explore</a></p>
         </div>
     </main>
-<!--
-    <footer>
-        <ul>
-            <li><a>About</a></li>
-            <li><a>Explore</a></li>
-            <li><a>FAQ</a></li>
-        </ul>
-    </footer>
--->
 </body>
 </html>

@@ -17,6 +17,16 @@ h1,h2,h3,h4,h5,h6 {
 
 a {
     text-decoration: none;
+    color: #551A8B;
+}
+
+a:link, a:visited {
+    color: #551A8B;
+}
+
+a:hover {
+    color: white;
+    text-decoration: underline;
 }
 
 .main-home {
@@ -32,6 +42,7 @@ a {
 .main-explore {
     background-color: #8B8B8C;
     height: 100%;
+    width: 90%;
     position: absolute;
     color: #151517;
 }
@@ -46,11 +57,12 @@ a {
     margin-left: 50px;
 }
 
-/*
-.main-explore img {
-    padding-bottom: 150px;
+main {
+    background-color: #8B8B8C;
+    height: 100%;
+    width: 90%;
+    position: absolute;
 }
-*/
 
 header {
     background: #151517;
@@ -70,11 +82,16 @@ header ul li {
     margin-right: 100px;
 }
 
-header ul li:last-of-type {
+#sign-up {
     background: white;
-    color: #151517;
     padding: 15px;
     border-radius: 5px;
+}
+
+#sign-up:hover {
+    background: #551A8B;
+    color: white;
+    cursor: pointer;
 }
 
 footer {
@@ -102,4 +119,117 @@ footer {
     display: flex;
     justify-content: space-evenly;
     align-items: flex-start;
+}
+
+
+table {
+    width: 100%;
+    text-align: left;
+}
+
+/*********Form Styles***********/
+form input {
+    font-family: 'Zilla Slab', serif;
+}
+
+
+#login-form {
+    width: 60%;
+    margin: 50px auto 50px auto;
+    border: 3px solid black;
+    padding: 30px;
+}
+
+#login-form h1 {
+    background-color:#551A8B;
+    padding: 20px 0 20px 0;
+    text-align: center;
+    margin-top: 0px;
+    font-size: 2em;
+    width: 100%;
+    color: #F5F5F5;
+}
+
+#login-form input {
+    width: 100%;
+    padding: 10px 0 10px 0;
+    font-size: 1.2em;
+    margin: 5px auto 5px auto;
+}
+
+#submitBtn {
+    background-color: #551A8B;
+    border: none;
+    color: #ffffff;
+}
+
+#submitBtn:hover {
+    background-color: #151517;
+    cursor: pointer;
+}
+
+.submitBtn {
+    background-color: #808080;
+    border: none;
+    color: #ffffff;
+}
+
+.submitBtn:hover {
+    background-color: #551A8B;
+    cursor: pointer;
+}
+
+#login-form #registration {
+    font-size:1.5em;
+}
+
+#accountSignup {
+    width: 100%;
+    border: 3px solid #551A8B;
+    padding: 10px 0 10px 0;
+    text-align: center;
+}
+
+#login-form a  {
+    text-decoration: none;
+    color: #551A8B;
+}
+
+#accountSignup:hover {
+    cursor: pointer;
+    color: #151517;
+    border: 3px solid #151517;
+}
+
+.error {
+    color: #551A8B;
+}
+
+.success {
+    color: green;
+}
+
+#login-form select {
+    width: 100%;
+    padding: 10px 0 10px 0;
+    font-size: 1.2em;
+    margin: 5px auto 5px auto;
+    font-family: 'Zilla Slab', serif;
+    background: #FAFAFA;
+    font-weight: 100;
+}
+
+textarea{
+    height: 150px;
+    font-family: 'Zilla Slab', serif;
+    font-size: 1.2em;
+    width: 100%;
+}
+
+.description {
+    height: 150px;
+}
+
+.formy {
+    margin-top: 40px;
 }
