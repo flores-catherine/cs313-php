@@ -52,10 +52,7 @@ switch ($action) {
         // Store the array into the session
         $_SESSION['clientData'] = $clientData;
         
-        setcookie('firstname', '', (-3600), '/');
-        
-        $message = "<p class='success'> Hey there! You're logged in.</p>";
-        
+        $message = "<p> Hey there! You're logged in.</p>";       
         include "views/user.php";
         break;
     case 'logout':
@@ -111,22 +108,7 @@ switch ($action) {
             exit;
         }
         break;
-    case 'account':
-        $userID = $_SESSION['clientData']['userid'];
-        $userQuotes = getUserQuotes($userID);
-        
-//        var_dump ($userQuotes);
-//        exit;
-        
-//        if(count($userQuotes)){
-//            $buildUserQuotes = buildUserQuotes($userQuotes);
-//        }else {
-//            $buildUserQuotes = "<p>You have not submitted any quotes.</p>";
-//        }
-        
-//        array_keys($buildUserQuotes);
-//        exit;
-        
+    case 'account':    
         include "views/user.php";
         break;
     case 'newQuote':
@@ -134,7 +116,7 @@ switch ($action) {
         break;
     case 'add':
         $newquote = filter_input(INPUT_POST, 'quoteText', FILTER_SANITIZE_STRING);
-        $movieID = $categoryId = filter_input(INPUT_POST, 'movieID', FILTER_SANITIZE_NUMBER_INT);
+        $movieID = filter_input(INPUT_POST, 'movieID', FILTER_SANITIZE_NUMBER_INT);
 
         if(empty($newquote) || empty($movieID)){
             $message="<p class='error'>Please enter all information in. </p>";
@@ -162,12 +144,71 @@ switch ($action) {
         $movieID = filter_input(INPUT_POST, 'movieID', FILTER_SANITIZE_NUMBER_INT);
         $getQuotes = getQuotes($movieID);
         $movieQuote = '<h2>Quotes</h2>';
-        $movieQuote .= '<ul>';
+        $movieQuote .= '<table>';
+        $movieQuote .= '<thead>';
+        $movieQuote .= '<tr><th>Quotes</th></tr>';
+        $movieQuote .= '</thead>';
+        $movieQuote .= '<tbody>';
         foreach ($getQuotes as $quote) {
-            $movieQuote .= "<li>'$quote[quote]'</li>";   
+            $movieQuote .= "<tr><td>'$quote[quote]'</td></tr>";   
         }
-        $movieQuote .= "</ul>"; 
+        $movieQuote .= "</tbody></table>";  
         include "views/explore.php";
+        break;
+    case 'Keyword':
+        $keyword = filter_input(INPUT_POST, 'keyword', FILTER_SANITIZE_STRING);
+        $getQuotesKeyword = getQuotesKeyword($keyword);
+        if( empty($getQuotesKeyword) ){
+            $movieQuote = '<h2>Sorry, no quotes were found.</h2>';
+            include 'views/explore.php';
+            exit; 
+        } else{
+            $movieQuote = '<h2>Quotes</h2>';
+            $movieQuote .= '<table>';
+            $movieQuote .= '<thead>';
+            $movieQuote .= '<tr><th>Quote</th><th>Movie</th></tr>';
+            $movieQuote .= '</thead>';
+            $movieQuote .= '<tbody>';
+            foreach ($getQuotesKeyword  as $quote) {
+                $movieQuote .= "<tr><td>'$quote[quote]'</td>";
+                $movieQuote .= "<td>'$quote[movietitle]'</td></tr>";
+            }
+        }
+        $movieQuote .= "</tbody></table>"; 
+        include "views/explore.php";
+        break;
+    case 'edit':
+        $quoteID = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+        $indQuote = getIndQuote($quoteID);
+        $movieQuote = $indQuote['quote'];
+        include "views/edit.php";
+        exit;
+    case 'update':
+        $quoteID = filter_input(INPUT_POST, 'quoteid', FILTER_SANITIZE_NUMBER_INT);
+        $newquote = filter_input(INPUT_POST, 'quoteText', FILTER_SANITIZE_STRING);
+        $movieID = filter_input(INPUT_POST, 'movieID', FILTER_SANITIZE_NUMBER_INT);
+//        echo $quoteID . "<br>";
+//        echo $newquote . "<br>";
+//        echo $movieID . "<br>";
+//        exit;
+//        
+        if(empty($newquote) || empty($movieID)){
+            $message="<p class='error'>Please enter all information in. </p>";
+            include 'views/edit.php';
+            exit;
+        }
+        
+        $updateResult = updateQuote($newquote, $quoteID, $movieID);
+
+        if ($updateResult===1){
+            $message="<p>Quote was successfully UPDATED </p>";
+            include 'views/user.php';
+            exit;
+        } else {
+            $message = "<p class='error'> Quote was not successfully submitted. Please Try again. </p>";
+            include 'views/edit.php';
+            exit;
+        }
         break;
     default:
         include "views/home.php";

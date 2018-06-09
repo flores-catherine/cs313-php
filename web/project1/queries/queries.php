@@ -21,6 +21,19 @@ function getQuotes($movieID){
     return $movieQuotes;    
 }
 
+function getQuotesKeyword($keyword){
+    $db = get_db();
+    $keyword = '%' . $keyword . '%';
+    $sql = "SELECT quotes.quote, movies.movieTitle FROM quotes INNER JOIN movies ON quotes.movieID=movies.movieID WHERE LOWER(quote) LIKE LOWER(:keyword)";
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':keyword', $keyword, PDO::PARAM_STR);
+    $stmt->execute();
+    $movieQuotes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $movieQuotes;    
+}
+
+
 function getAllMovies() {
     $db = get_db();
     $sql = 'SELECT movieTitle, movieid FROM movies ORDER BY movieTitle ASC';
@@ -101,11 +114,37 @@ function getClient($clientEmail){
 
 function getUserQuotes($userID){
   $db = get_db();
-  $sql = 'SELECT quotes.quote, movies.movietitle, movies.releaseyear FROM quotes INNER JOIN movies ON quotes.movieid=movies.movieid WHERE userid = :userid';
+  $sql = 'SELECT quotes.quoteid, quotes.quote, movies.movietitle, movies.releaseyear FROM quotes INNER JOIN movies ON quotes.movieid=movies.movieid WHERE userid = :userid ORDER BY movieTitle ASC';
   $stmt = $db->prepare($sql);
-  $stmt->bindValue(':userid', $userID, PDO::PARAM_STR);
+  $stmt->bindValue(':userid', $userID, PDO::PARAM_INT);
   $stmt->execute();
-  $userquotes = $stmt->fetch(PDO::FETCH_ASSOC);
+  $userquotes = $stmt->fetchAll(PDO::FETCH_ASSOC);
   $stmt->closeCursor();
   return $userquotes;
+}
+
+function getIndQuote($quoteID) {
+    $db = get_db();
+    $sql = 'SELECT quote FROM quotes WHERE quoteid = :quoteid';
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':quoteid', $quoteID, PDO::PARAM_INT);
+    $stmt->execute();
+    $indQuote = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $indQuote;
+}
+
+function updateQuote($quote, $quoteID, $movieID){
+    $db = get_db();
+    $sql = 'UPDATE quotes SET quote = :quote, movieid = :movieid WHERE quoteid = :quoteid';
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':quoteid', $quoteID, PDO::PARAM_INT);
+    $stmt->bindValue(':movieid', $movieID, PDO::PARAM_INT);
+    $stmt->bindValue(':quote', $quote, PDO::PARAM_STR);
+    $stmt->execute();
+    $rowsChanged = $stmt->rowCount();
+    // Close the database interaction
+    $stmt->closeCursor();
+    // Return the indication of success (rows changed)
+    return $rowsChanged;
 }

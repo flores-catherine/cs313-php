@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
-    <meta charset="utf-8">
     <title>Sign up | Arnold One Liners</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Sign up for an account with the Arnold One-Liner Database">
-    <link href="arnold.css" rel="stylesheet">
-    <script src=""></script>
+    <?php
+        include 'modules/head.php';
+    ?>
 </head>
  
-<body>
+<body class='container'>
     <?php
     include 'modules/header.php';
     ?>

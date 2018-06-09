@@ -9,7 +9,7 @@ function checkEmail($clientEmail) {
 function buildUserQuotes($userQuotes) {
     $quotes = '<table border="1">';
     $quotes .= '<thead>';
-    $quotes .= '<tr><th>Quote</th><th>Movie</th><th>Release Date</th><td></td></tr>';
+    $quotes .= '<tr><th>Quote</th><th>Movie</th><th>Release Date</th><th></th></tr>';
     $quotes .= '</thead>';
     $quotes .= '<tbody>';
     foreach ($userQuotes as $quote) {
